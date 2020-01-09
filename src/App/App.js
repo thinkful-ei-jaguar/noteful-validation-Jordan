@@ -15,7 +15,12 @@ class App extends Component {
         error: null
     };
 
-    
+    deleteNote = noteId => {
+        const newNotes = this.state.notes.filter(note => note.id !== noteId)
+        this.setState({
+            notes: newNotes
+        });
+    }
 
     componentDidMount() {
         fetch('http://localhost:9090/folders') 
@@ -93,6 +98,7 @@ class App extends Component {
                 ))}
                 <Route
                     path="/note/:noteId"
+                    // component={NotePageMain}
                     render={routeProps => {
                         return <NotePageMain {...routeProps} />;
                     }}
@@ -105,7 +111,8 @@ class App extends Component {
         return (
             <StateContext.Provider value={{
                 folders: this.state.folders,
-                notes: this.state.notes
+                notes: this.state.notes,
+                deleteNote: this.deleteNote
             }}>
                 <div className="App">
                     <nav className="App__nav">{this.renderNavRoutes()}</nav>
