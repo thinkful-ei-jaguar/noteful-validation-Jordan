@@ -3,6 +3,7 @@ import Note from '../Note/Note'
 import './NotePageMain.css'
 
 export default function NotePageMain(props) {
+  //findNote function would happen here 
   return (
     <section className='NotePageMain'>
       <Note
