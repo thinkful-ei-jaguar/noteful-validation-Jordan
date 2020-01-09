@@ -5,21 +5,50 @@ import NoteListNav from '../NoteListNav/NoteListNav';
 import NotePageNav from '../NotePageNav/NotePageNav';
 import NoteListMain from '../NoteListMain/NoteListMain';
 import NotePageMain from '../NotePageMain/NotePageMain';
-import dummyStore from '../dummy-store';
 import StateContext from '../StateContext';
 import './App.css';
 
 class App extends Component {
     state = {
         notes: [],
-        folders: []
+        folders: [],
+        error: null
     };
 
     
 
     componentDidMount() {
-        // fake date loading from API call
-        setTimeout(() => this.setState(dummyStore), 600);
+        fetch('http://localhost:9090/folders') 
+            .then(res => {
+                if(!res.ok) {
+                    throw new Error(res.statusText);
+                }
+                return res.json()
+        })
+        .then(res => {
+                // const folders = Object.keys(res)
+                //     .map(key => res[key].item[0])
+                this.setState({
+                folders: res,
+            })
+        })
+        .catch(err => this.setState({
+            error: err.message
+        }))
+
+        fetch('http://localhost:9090/notes')
+            .then(res => {
+                if(!res.ok){
+                    throw new Error(res.statusText);
+                }
+                return res.json();
+            })
+            .then(res => this.setState({
+                notes: res
+            }))
+            .catch(err => this.setState({
+                error: err.message
+            }))
     }
 
     renderNavRoutes() {
