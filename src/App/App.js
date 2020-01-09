@@ -6,7 +6,6 @@ import NotePageNav from '../NotePageNav/NotePageNav';
 import NoteListMain from '../NoteListMain/NoteListMain';
 import NotePageMain from '../NotePageMain/NotePageMain';
 import dummyStore from '../dummy-store';
-import {getNotesForFolder, findNote, findFolder} from '../notes-helpers';
 import StateContext from '../StateContext';
 import './App.css';
 
@@ -47,7 +46,6 @@ class App extends Component {
     }
 
     renderMainRoutes() {
-        const {notes, folders} = this.state;
         return (
             <>
                 {['/', '/folder/:folderId'].map(path => (
@@ -56,15 +54,9 @@ class App extends Component {
                         key={path}
                         path={path}
                         render={routeProps => {
-                            const {folderId} = routeProps.match.params;
-                            const notesForFolder = getNotesForFolder(
-                                notes,
-                                folderId
-                            );
                             return (
                                 <NoteListMain
-                                    {...routeProps}
-                                    notes={notesForFolder}
+                                    {...routeProps} 
                                 />
                             );
                         }}
@@ -73,9 +65,7 @@ class App extends Component {
                 <Route
                     path="/note/:noteId"
                     render={routeProps => {
-                        const {noteId} = routeProps.match.params;
-                        const note = findNote(notes, noteId);
-                        return <NotePageMain {...routeProps} note={note} />;
+                        return <NotePageMain {...routeProps} />;
                     }}
                 />
             </>

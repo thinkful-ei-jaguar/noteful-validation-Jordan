@@ -35,9 +35,3 @@ export default class NotePageNav extends React.Component {
       )
   }
 }
-
-/*NotePageNav.defaultProps = {
-  history: {
-    goBack: () => {}
-  }
-}*/
