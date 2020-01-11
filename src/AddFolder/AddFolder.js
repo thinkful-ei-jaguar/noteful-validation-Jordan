@@ -11,10 +11,6 @@ class AddFolder extends Component {
     }
   }
 
-  // updateFolderName(folderName){
-  //   this.setState({folderName: {name: folderName, touched: true}})
-  // }
-
   validateFolderName = (value) => {
     const name= value.trim();
     if (name.length === 0){
