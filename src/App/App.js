@@ -5,7 +5,10 @@ import NoteListNav from '../NoteListNav/NoteListNav';
 import NotePageNav from '../NotePageNav/NotePageNav';
 import NoteListMain from '../NoteListMain/NoteListMain';
 import NotePageMain from '../NotePageMain/NotePageMain';
+import AddFolder from '../AddFolder/AddFolder';
+import AddNote from '../AddNote/AddNote';
 import StateContext from '../StateContext';
+import ErrorPage from '../ErrorPage';
 import './App.css';
 
 class App extends Component {
@@ -20,6 +23,21 @@ class App extends Component {
         this.setState({
             notes: newNotes
         });
+    }
+
+    addFolder = (newFolder) => {
+        this.setState({
+          folders: [...this.state.folders,              newFolder
+            ]
+        })
+      }
+
+    addNote = (newNote) => {
+        this.setState({
+            notes: [...this.state.notes, 
+                newNote
+            ]
+        })
     }
 
     componentDidMount() {
@@ -48,9 +66,12 @@ class App extends Component {
                 }
                 return res.json();
             })
-            .then(res => this.setState({
+            .then(res => {
+                this.setState({
                 notes: res
-            }))
+            })
+            console.log('Notes from fetch:', this.state.notes);
+            })
             .catch(err => this.setState({
                 error: err.message
             }))
@@ -73,8 +94,8 @@ class App extends Component {
                         return <NotePageNav {...routeProps}/>
                     }}
                 />
-                <Route path="/add-folder" component={NotePageNav} />
-                <Route path="/add-note" component={NotePageNav} />
+                <Route path="/add-folder" component={AddFolder} />
+                <Route path="/add-note" component={AddNote} />
             </>
         );
     }
@@ -109,22 +130,30 @@ class App extends Component {
 
     render() {
         return (
-            <StateContext.Provider value={{
-                folders: this.state.folders,
-                notes: this.state.notes,
-                deleteNote: this.deleteNote
-            }}>
-                <div className="App">
-                    <nav className="App__nav">{this.renderNavRoutes()}</nav>
-                    <header className="App__header">
-                        <h1>
-                            <Link to="/">Noteful</Link>{' '}
-                            <FontAwesomeIcon icon="check-double" />
-                        </h1>
-                    </header>
-                    <main className="App__main">{this.renderMainRoutes()}</main>
-                </div>
-            </StateContext.Provider>
+            <ErrorPage>
+                <StateContext.Provider value={{
+                    folders: this.state.folders,
+                    notes: this.state.notes,
+                    deleteNote: this.deleteNote,
+                    addFolder: this.addFolder,
+                    addNote : this.addNote
+                }}>
+                    <div className="App">
+                        <nav className="App__nav">
+                            {this.renderNavRoutes()}
+                        </nav>
+                        <header className="App__header">
+                            <h1>
+                                <Link to="/">Noteful</Link>{' '}
+                                <FontAwesomeIcon icon="check-double" />
+                            </h1>
+                        </header>
+                        <main className="App__main">
+                            {this.renderMainRoutes()}
+                        </main>
+                    </div>
+                </StateContext.Provider>
+            </ErrorPage>
         );
     }
 }

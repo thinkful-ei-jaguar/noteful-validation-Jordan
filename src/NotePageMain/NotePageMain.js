@@ -6,17 +6,15 @@ import {findNote} from '../notes-helpers'
 
 export default class NotePageMain extends React.Component {
   static contextType = StateContext;
-  // handleDeletePush = () => {
-  //   this.props.history.push('/')
-  // }
 
   render () {
-    const {notes} = this.context
-    console.log('notes from Context:', notes);
+    const {notes} = this.context;
+    console.log('Notes from context:', notes);
     
     const {noteId} = this.props.match.params;
     const note = findNote(notes, noteId);
-    console.log('Note from findNote:', note);
+    console.log('note from findNote:', note);
+    
   
   return (
     <section className='NotePageMain'>

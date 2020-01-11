@@ -5,8 +5,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import StateContext from '../StateContext'
 import './Note.css'
 
-
-
 export default class Note extends React.Component{
   static contextType = StateContext;
   

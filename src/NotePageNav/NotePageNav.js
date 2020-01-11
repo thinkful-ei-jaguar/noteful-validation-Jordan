@@ -13,13 +13,13 @@ export default class NotePageNav extends React.Component {
     const {noteId} = this.props.match.params;
     const note = findNote(notes, noteId) || {};
     const folder = findFolder(folders, note.folderId);
-    console.log(note);
+
       return (
         <div className='NotePageNav'>
           <CircleButton
             tag='button'
             role='link'
-            onClick={() => this.props.history.goBack()}
+            onClick={() => this.props.history.push('/')}
             className='NotePageNav__back-button'
           >
             <FontAwesomeIcon icon='chevron-left' />
