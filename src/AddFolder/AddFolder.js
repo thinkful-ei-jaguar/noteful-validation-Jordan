@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import ValidationError from '../ValidationError'
 import StateContext from '../StateContext'
+import './AddFolder.css';
 
 class AddFolder extends Component {
   static contextType = StateContext;

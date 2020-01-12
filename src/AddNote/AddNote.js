@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import ValidationError from '../ValidationError'
 import StateContext from '../StateContext'
+import './AddNote.css'
 
 
 class AddNote extends Component {
@@ -91,10 +92,10 @@ class AddNote extends Component {
           <label htmlFor='note-name'>Name of Note: </label>
           <input type='text' className='note-name' id='note-name' name='noteName'/>
           {this.state.error && (<ValidationError message={this.state.error} clearError={this.clearError}/>)}
-
-          <label htmlFor='note-content'>Note content: </label>
-          <input type='text' className='note-content' id='note-content' name='noteContent'/>
-
+          <div className='textarea-content'>
+            <label htmlFor='note-content'>Note content: </label>
+            <textarea type='text' className='note-content' id='note-content' name='noteContent' rows='5' columns='5'/>
+          </div>
           <label htmlFor='note-folder'>Folder: </label>
           <select id='note-folder' className='note-folder' name='noteFolder'>
             {options}
