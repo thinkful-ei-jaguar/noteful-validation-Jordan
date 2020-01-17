@@ -47,6 +47,8 @@
   margin-right: 10px;
 }
 
-.addnote-button:hover {
+.addFolder-button:hover {
   cursor: pointer;
+  background-color: #29862e;
+  color: white;
 }

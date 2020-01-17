@@ -65,4 +65,6 @@
 
 .addnote-button:hover {
   cursor: pointer;
+  background-color: #29862e;
+  color: white;
 }
