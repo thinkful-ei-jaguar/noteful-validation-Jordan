@@ -8,7 +8,7 @@ import { BrowserRouter } from 'react-router-dom'
 import 'typeface-roboto'
 import './index.css'
 import App from './App/App'
-// import AddFolder from './AddFolder/AddFolder'
+
 library.add(faPlus, faChevronLeft, faTrashAlt, faCheckDouble)
 
 

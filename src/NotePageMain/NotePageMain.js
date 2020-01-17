@@ -1,5 +1,6 @@
 import React from 'react'
 import Note from '../Note/Note'
+import Loading from '../Loading/Loading'
 import './NotePageMain.css'
 import StateContext from '../StateContext'
 import {findNote} from '../notes-helpers'
@@ -16,7 +17,7 @@ export default class NotePageMain extends React.Component {
     console.log('note from findNote:', note);
     
   
-  return (
+  return note ? (
     <section className='NotePageMain'>
       <Note
         id={note.id}
@@ -30,7 +31,10 @@ export default class NotePageMain extends React.Component {
         )}
       </div>
     </section>
-  )
+  ) : (
+  <section className='NotePageMain'>
+    <Loading />
+  </section>)
         }
 }
 

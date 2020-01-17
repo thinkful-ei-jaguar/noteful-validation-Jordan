@@ -27,7 +27,8 @@ class App extends Component {
 
     addFolder = (newFolder) => {
         this.setState({
-          folders: [...this.state.folders,              newFolder
+            folders: [...this.state.folders, 
+                newFolder
             ]
         })
       }
@@ -41,6 +42,7 @@ class App extends Component {
     }
 
     componentDidMount() {
+        //console log in here to see if this gets triggered after a refresh 
         fetch('http://localhost:9090/folders') 
             .then(res => {
                 if(!res.ok) {
